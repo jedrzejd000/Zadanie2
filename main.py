@@ -1,16 +1,30 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from ExcelCreator import ExcelCreator
+from UsersApiService import UsersApiService
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+   usersApiService = UsersApiService()
+   resultsCount=50
+   data = usersApiService.getUsers(resultsCount)
+   excelCreator = ExcelCreator()
+   file = excelCreator.makeFile()
+   sheet = excelCreator.makeSheet(file)
+   startColumn=1
+   startRow=1
+   rowsCount=resultsCount
+   titles = ['Imię', 'Nazwisko', 'Płeć', 'Data urodzenia',
+             'Numer kontaktowy', 'Adres E-mail', 'Kraj pochodzenia', 'Darmowe badania',
+             'Przedział wiekowy', 'Kraj pochodzenia']
+
+   excelCreator.makeHeadersBar(startColumn,startRow,titles,sheet)
+   startRow=2
+   excelCreator.loadDataToRows(startColumn, startRow,rowsCount,data,sheet)
+   fileName= "nowyPlik.xlsx"
+   excelCreator.saveFile(file,fileName)
 
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
