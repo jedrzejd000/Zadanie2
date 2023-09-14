@@ -1,6 +1,6 @@
 from ExcelCreator import ExcelCreator
 from UsersApiService import UsersApiService
-
+import os
 
 def main():
    usersApiService = UsersApiService()
@@ -19,8 +19,18 @@ def main():
    excelCreator.makeHeadersBar(startColumn,startRow,titles,sheet)
    startRow=2
    excelCreator.loadDataToRows(startColumn, startRow,rowsCount,data,sheet)
+
+
    fileName= "nowyPlik.xlsx"
-   excelCreator.saveFile(file,fileName)
+   folderName = "plikiExcel"
+   desktopPath = os.path.join(os.path.expanduser("~"), "Desktop") if os.name == 'posix' else os.path.join(
+      os.path.expanduser("~"), "Pulpit")
+   folderPath = os.path.join(desktopPath, folderName)
+   if not os.path.exists(folderPath):
+      os.makedirs(folderPath)
+   filePath = os.path.join(folderPath, fileName) #ostateczna scieżka do pliku
+
+   excelCreator.saveFile(file,filePath)
 
 
 

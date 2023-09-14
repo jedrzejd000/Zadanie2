@@ -1,4 +1,4 @@
-import os
+
 import openpyxl as openpyxl
 from openpyxl.styles import Border, Side
 import pycountry_convert as pc
@@ -40,15 +40,9 @@ class ExcelCreator:
         sheet = file.active
         return sheet
 
-    def saveFile(self,workbook,fileName):
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop") if os.name == 'posix' else os.path.join(os.path.expanduser("~"), "Pulpit")
-        folder_name = "plikiExcel"
-        folder_path = os.path.join(desktop_path, folder_name)
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
-        file_path = os.path.join(folder_path, fileName)
-        workbook.save(file_path)
-        print("plik został zapisany w scieżce: " + file_path)
+    def saveFile(self,workbook,filePath):
+        workbook.save(filePath)
+        print("plik został zapisany w scieżce: " + filePath)
 
 
     def makeHeadersBar(self,startColumn,startRow,titlesArray, sheet):

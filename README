@@ -1,0 +1,4 @@
+1.Należy zainstalować zależności z requirements.txt, za pomocą "pip install -r requirements.txt"
+2.Plik excel zostanie zapisany w: C:\Users\user\Pulpit\plikiExcel\nowyPlik.xlsx
+3.Jeśli zajdzie taka potrzeba to scieżke można zmienić w pliku main.py
+w lini 31:filePath = os.path.join(folderPath, fileName) #ostateczna scieżka do pliku
